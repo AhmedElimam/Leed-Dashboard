@@ -26,6 +26,9 @@ class Kernel extends ConsoleKernel
     {
         // Schedule artisan commands or tasks here
     }
+    protected $routeMiddleware = [
+        'adminAuth' => \App\Http\Middleware\AdminAuth::class
+    ];
 
     /**
      * Register the commands for the application.

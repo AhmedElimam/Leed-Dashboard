@@ -9,9 +9,7 @@
         <a href="{{ route('dashboard') }}" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
             <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
         </a>
-        <a href="{{ route('blank') }}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-            <i class="fas fa-sticky-note mr-3"></i> Blank Page
-        </a>
+
         <!-- Add more links here -->
     </nav>
     <a href="#" class="absolute w-full upgrade-btn bottom-0 active-nav-link text-white flex items-center justify-center py-4">
