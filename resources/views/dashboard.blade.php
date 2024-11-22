@@ -3,6 +3,8 @@
 @section('title', 'Dashboard')
 
 @section('content')
+    @extends('partials.sidebar')
+
     <h1 class="text-3xl text-black pb-6">Dashboard</h1>
 
     <div class="flex flex-wrap mt-6">
