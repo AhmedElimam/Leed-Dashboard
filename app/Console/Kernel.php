@@ -8,15 +8,6 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     /**
-     * The Artisan commands provided by your application.
-     *
-     * @var array
-     */
-    protected $commands = [
-        \App\Console\Commands\MakeServiceCommand::class, // Register your custom command here
-    ];
-
-    /**
      * Define the application's command schedule.
      *
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
@@ -24,11 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // Schedule artisan commands or tasks here
+        // $schedule->command('inspire')->hourly();
     }
-    protected $routeMiddleware = [
-        'adminAuth' => \App\Http\Middleware\AdminAuth::class
-    ];
 
     /**
      * Register the commands for the application.
@@ -37,8 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__ . '/Commands'); // Load all commands in the Commands directory
+        $this->load(__DIR__.'/Commands');
 
-        require base_path('routes/console.php'); // Include console routes
+        require base_path('routes/console.php');
     }
 }
