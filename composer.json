@@ -1,6 +1,7 @@
 {
     "require": {
-        "laravel/laravel": "^11.3"
+        "laravel/laravel": "^11.3",
+        "laravel/sanctum": "^4.0"
     },
     "autoload": {
         "psr-4": {
