@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('Role');
             $table->rememberToken();
+            $table->string('firebase_uid')->nullable()->unique();
             $table->timestamps();
         });
 

@@ -89,4 +89,10 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($value);
     }
+
+    public function findByFirebaseUid($firebaseUid)
+    {
+        return User::where('firebase_uid', $firebaseUid)->first();
+    }
+
 }
