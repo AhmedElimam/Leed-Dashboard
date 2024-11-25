@@ -11,8 +11,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 
 
 
-Route::get("/create",[firebase::class,'show'] );
-Route::post('/register', [firebase::class, 'create'])->name('register');
 
 
 
