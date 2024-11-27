@@ -16,11 +16,11 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('gender');
-            $table->string('phone_number');
+            $table->string('phone_number')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('Role')->nullable(); // Make Role nullable
+            $table->string('role')->nullable();
             $table->rememberToken();
             $table->string('firebase_uid')->nullable()->unique();
             $table->timestamps();
@@ -29,6 +29,7 @@ return new class extends Migration
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
+            $table->string('phone_number')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
