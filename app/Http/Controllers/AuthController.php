@@ -18,7 +18,7 @@ class AuthController extends Controller
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:8',
                 'phone_number' => 'required|string|max:255',
-                'gender' => 'required|string|max:255',
+                'gender' => 'required|string|max:255'
             ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json(['data' => $e->errors()], 400);
@@ -29,12 +29,13 @@ class AuthController extends Controller
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
             'phone_number' => $validatedData['phone_number'],
-            'gender' => $validatedData['gender']
+            'gender' => $request->gender ?? 'not_specified',
+            'role' => 'User',
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json(['token' => $token, 'user' => $user], 201);
+        return response()->json(['token' => $token, 'user' => $user], 200);
     }
     public function login(Request $request)
     {
