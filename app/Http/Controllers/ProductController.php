@@ -12,9 +12,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = auth()->user()->products;
         return response()->json(['products' => $products]);
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -34,7 +35,7 @@ class ProductController extends Controller
             $imagePath = $request->file('image')->store('products', 'public');
         }
 
-        $product = Product::create([
+        $product = auth()->user()->products()->create([
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
@@ -46,12 +47,13 @@ class ProductController extends Controller
     }
 
 
+
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        $product = Product::find($id);
+        $product = auth()->user()->products()->find($id);
 
         if (!$product) {
             return response()->json(['error' => 'Product not found'], 404);
@@ -60,12 +62,11 @@ class ProductController extends Controller
         return response()->json(['product' => $product]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
+
     public function update(Request $request, string $id)
     {
-        $product = Product::find($id);
+        $product = auth()->user()->products()->find($id);
 
         if (!$product) {
             return response()->json(['error' => 'Product not found'], 404);
@@ -81,7 +82,7 @@ class ProductController extends Controller
 
         if ($request->hasFile('image')) {
             if ($product->image_path) {
-                Storage::disk('public')->delete($product->image_path);
+                \Storage::disk('public')->delete($product->image_path);
             }
             $product->image_path = $request->file('image')->store('products', 'public');
         }
@@ -89,26 +90,27 @@ class ProductController extends Controller
         $product->update($request->only('name', 'description', 'price', 'quantity'));
 
         return response()->json(['product' => $product, 'message' => 'Product updated successfully']);
-
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        $product = Product::find($id);
+        $product = auth()->user()->products()->find($id);
 
         if (!$product) {
             return response()->json(['error' => 'Product not found'], 404);
         }
 
         if ($product->image_path) {
-            Storage::disk('public')->delete($product->image_path);
+            \Storage::disk('public')->delete($product->image_path);
         }
 
         $product->delete();
 
         return response()->json(['message' => 'Product deleted successfully']);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+
 }

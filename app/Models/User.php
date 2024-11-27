@@ -96,4 +96,9 @@ class User extends Authenticatable
         return User::where('firebase_uid', $firebaseUid)->first();
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
 }
