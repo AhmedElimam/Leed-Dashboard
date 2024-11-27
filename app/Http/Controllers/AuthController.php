@@ -30,6 +30,7 @@ class AuthController extends Controller
         return $this->authService->register($data);
     }
 
+<<<<<<< Updated upstream
     // Login action
     public function login(LoginRequest $request)
     {
@@ -66,4 +67,37 @@ class AuthController extends Controller
         // Call the logout method from the AuthService
         return $this->authService->logout();
     }
+=======
+return response()->json(['token' => $token, 'user' => $user], 200);
+}
+
+public function login(Request $request)
+{
+$request->validate([
+'email' => 'required|string|email',
+'password' => 'required|string',
+]);
+
+if (!Auth::attempt($request->only('email', 'password'))) {
+return response()->json(['message' => 'Invalid credentials'], 400);
+}
+
+$user = User::where('email', $request->email)->firstOrFail();
+$token = $user->createToken('auth_token')->plainTextToken;
+
+return response()->json(['token' => $token, 'user' => $user], 200);
+}
+
+public function profile(Request $request)
+{
+return response()->json($request->user());
+}
+
+public function logout(Request $request)
+{
+$request->user()->currentAccessToken()->delete();
+
+return response()->json(['message' => 'Logged out successfully']);
+}
+>>>>>>> Stashed changes
 }
