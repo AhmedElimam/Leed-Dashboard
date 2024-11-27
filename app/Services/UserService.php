@@ -12,6 +12,8 @@ class UserService
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'phone_number' => $data['phone_number'],
+            'gender' => $data['gender'],
             'role' => $data['role'],
         ]);
     }
