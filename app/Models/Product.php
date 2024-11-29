@@ -15,10 +15,15 @@ class Product extends Model
         'price',
         'quantity',
         'image_path',
-        'user_id'
+        'user_id',
+        'brand_id'
     ];
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
     }
 }

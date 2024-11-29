@@ -6,18 +6,21 @@ use App\Http\Controllers\FireController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\BrandController;
 
 Route::post('/sign', [FireController::class, 'register']);
 Route::post('/signin', [FireController::class, 'login']);
 
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/products', [ProductController::class, 'index']);
-    Route::post('/products', [ProductController::class, 'store']);
-    Route::put('/products/{id}', [ProductController::class, 'update']);
-    Route::delete('/products/{id}', [ProductController::class, 'destroy']);
-});
 
+    Route::get('/brands', [BrandController::class, 'index']);
+    Route::post('/brands', [BrandController::class, 'store']);
+    Route::get('/brands/{id}', [BrandController::class, 'show']);
+
+
+    Route::apiResource('/products', ProductController::class);
+});
 Route::apiResource('categories', CategoryController::class);
 
 

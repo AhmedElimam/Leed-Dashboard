@@ -28,6 +28,7 @@ class ProductController extends Controller
             'price' => 'required|numeric|min:0',
             'quantity' => 'required|integer|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'brand_id' => 'nullable|exists:brands,id',
         ]);
 
         $imagePath = null;
@@ -41,6 +42,8 @@ class ProductController extends Controller
             'price' => $request->price,
             'quantity' => $request->quantity,
             'image_path' => $imagePath,
+            'brand_id' => $request->brand_id,
+
         ]);
 
         return response()->json(['product' => $product, 'message' => 'Product created successfully'], 201);
